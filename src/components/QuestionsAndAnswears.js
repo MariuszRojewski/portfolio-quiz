@@ -1,9 +1,13 @@
 import React from "react";
 import { nanoid } from "nanoid";
 
-export default function QuestionsAndAnswears({ data, selectAnswears }) {
+export default function QuestionsAndAnswears({ data }) {
+  // const [allQuestions, setAllQuestion] = React.useState();
   let questions = null;
-  console.log(selectAnswears);
+
+  function selectAnswears(id) {
+    console.log(id);
+  }
 
   if (data.length > 1) {
     questions = data.map((item, index) => {

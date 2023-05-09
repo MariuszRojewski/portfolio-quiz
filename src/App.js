@@ -23,18 +23,12 @@ export default function App() {
     setStart(!start);
   }
 
-  // zwraca kliknięte id, trzeba teraz jakoś smienić stan
-  // albo trzeba ddoać stata w środku, nie wiem... - ale się dowiem :)
-  function selectAnswears(id) {
-    console.log(id);
-  }
-
   return (
     <>
       <div className="wrapper">
         {start ? (
           data.length > 1 ? (
-            <QuestionsAndAnswears data={data} selectAnswears={selectAnswears} />
+            <QuestionsAndAnswears data={data} />
           ) : (
             ""
           )
