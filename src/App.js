@@ -1,6 +1,6 @@
 import React from "react";
 import StartPage from "./components/StartPage";
-import QuestionsAndAnswears from "./components/QuestionsAndAnswears";
+import Board from "./components/Board";
 
 // API
 //https://opentdb.com/api.php?amount=5&category=20
@@ -28,7 +28,7 @@ export default function App() {
       <div className="wrapper">
         {start ? (
           data.length > 1 ? (
-            <QuestionsAndAnswears data={data} />
+            <Board data={data} />
           ) : (
             ""
           )

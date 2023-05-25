@@ -79,6 +79,13 @@ body {
   margin-bottom: 10px;
 }
 
+.question--category {
+  font-size:large;
+  text-align: center;
+  color: #4D5B9E;
+  margin-bottom: 10px;
+}
+
 .question--all-answears {
   display: flex;
   justify-content: center;
@@ -91,4 +98,8 @@ body {
   border-radius: 15px;
   margin: 0 5px;
   cursor: pointer;
+}
+
+.select{
+  background-color: aquamarine;
 }
