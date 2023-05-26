@@ -7,22 +7,9 @@ import Answear from "./Answear";
 export default function Question({
   category,
   question,
-  correctAnswear,
-  incorrectAnswers,
+  combinedAnswears,
+  checkUserSelected,
 }) {
-  const mapedIncorrectAnswers = incorrectAnswers.map((incorrect) => {
-    return {
-      value: incorrect,
-      id: nanoid(),
-      status: false,
-      select: false,
-    };
-  });
-  const combinedAnswears = [
-    ...mapedIncorrectAnswers,
-    { value: correctAnswear, id: nanoid(), status: true, select: false },
-  ];
-
   const [allAnswears, setAllAnswears] = React.useState(combinedAnswears);
 
   function handleSelect(id) {
@@ -35,11 +22,15 @@ export default function Question({
         }
       });
     });
+    // Jak to zostawiam, to ustawiam stan userSelected wyżej na true
+    // ale blokuje zaznaczanie przyciski na true...
+    checkUserSelected(true);
   }
 
   const answears = allAnswears.map((answear) => {
     return <Answear key={nanoid()} onClick={handleSelect} answear={answear} />;
   });
+
   return (
     <div className="question">
       <h1 className="question--header">{question}</h1>

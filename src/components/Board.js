@@ -3,10 +3,32 @@ import { nanoid } from "nanoid";
 import Question from "./Question";
 
 export default function QuestionsAndAnswears({ data }) {
+  const [userSelected, setUserSelected] = React.useState([]);
+  console.log(userSelected);
+
+  function checkUserSelected(value) {
+    setUserSelected((old) => [...old, value]);
+  }
+
   const board = data.map((question) => {
+    const mapedIncorrectAnswers = question.incorrect_answers.map(
+      (incorrect) => {
+        return {
+          value: incorrect,
+          id: nanoid(),
+          correct: false,
+          select: false,
+        };
+      }
+    );
     const combinedAnswears = [
-      ...question.incorrect_answers,
-      question.correct_answer,
+      ...mapedIncorrectAnswers,
+      {
+        value: question.correct_answer,
+        id: nanoid(),
+        correct: true,
+        select: false,
+      },
     ];
 
     return (
@@ -14,8 +36,8 @@ export default function QuestionsAndAnswears({ data }) {
         key={nanoid()}
         category={question.category}
         question={question.question}
-        correctAnswear={question.correct_answer}
-        incorrectAnswers={question.incorrect_answers}
+        combinedAnswears={combinedAnswears}
+        checkUserSelected={checkUserSelected}
       />
     );
   });
