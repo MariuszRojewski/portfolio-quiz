@@ -3,11 +3,17 @@ import { nanoid } from "nanoid";
 import Question from "./Question";
 
 export default function QuestionsAndAnswears({ data }) {
-  const [selectedAnswear, setSlectedAnswear] = React.useState([]);
+  let selectedAnswear = [];
 
   function sandAnswearUp(newItem) {
-    setSlectedAnswear((old) => {
-      return [...old, newItem];
+    selectedAnswear.push(newItem);
+    // setSlectedAnswear(true);
+
+    // selectedAnswear.forEach((item) => {
+    //   console.log(item);
+    // });
+    selectedAnswear.forEach((el) => {
+      console.log(el);
     });
   }
 
