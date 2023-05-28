@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Answear({ onClick, answear, checkUserSelected }) {
+export default function Answear({ onClick, answear }) {
   return (
     <button
       className={`question--answear ${answear.select ? "select" : ""}`}

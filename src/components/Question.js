@@ -8,9 +8,14 @@ export default function Question({
   category,
   question,
   combinedAnswears,
-  checkUserSelected,
+  sandAnswearUp,
 }) {
   const [allAnswears, setAllAnswears] = React.useState(combinedAnswears);
+
+  React.useEffect(() => {
+    console.log("ABC");
+    sandAnswearUp(allAnswears);
+  }, [allAnswears]);
 
   function handleSelect(id) {
     setAllAnswears((oldAnswear) => {
@@ -24,7 +29,6 @@ export default function Question({
     });
     // Jak to zostawiam, to ustawiam stan userSelected wyżej na true
     // ale blokuje zaznaczanie przyciski na true...
-    checkUserSelected(true);
   }
 
   const answears = allAnswears.map((answear) => {

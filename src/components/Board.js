@@ -3,11 +3,12 @@ import { nanoid } from "nanoid";
 import Question from "./Question";
 
 export default function QuestionsAndAnswears({ data }) {
-  const [userSelected, setUserSelected] = React.useState([]);
-  console.log(userSelected);
+  const [selectedAnswear, setSlectedAnswear] = React.useState([]);
 
-  function checkUserSelected(value) {
-    setUserSelected((old) => [...old, value]);
+  function sandAnswearUp(newItem) {
+    setSlectedAnswear((old) => {
+      return [...old, newItem];
+    });
   }
 
   const board = data.map((question) => {
@@ -37,7 +38,7 @@ export default function QuestionsAndAnswears({ data }) {
         category={question.category}
         question={question.question}
         combinedAnswears={combinedAnswears}
-        checkUserSelected={checkUserSelected}
+        sandAnswearUp={sandAnswearUp}
       />
     );
   });
