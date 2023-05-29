@@ -1,52 +1,42 @@
 import React from "react";
-import { nanoid } from "nanoid";
 import Question from "./Question";
 
 export default function QuestionsAndAnswears({ data }) {
-  let selectedAnswear = [];
+  const [allAnswears, setAllAnswears] = React.useState(data);
+  const combinedAnswears = [];
+  // const combinedAnswears = allAnswears[0].correct_answer[0].concat(
+  //   allAnswears.incorrect_answer[0]
+  // );
 
-  function sandAnswearUp(newItem) {
-    selectedAnswear.push(newItem);
-    // setSlectedAnswear(true);
+  for (let i = 0; i < allAnswears.length; i++) {
+    // MUSISZ JAKOŚ POŁACZYĆ TE OBIEKTY W CAŁOŚĆ, TAK ABY POWSTAŁ
+    // NOWY SCALONY OBIKET combinedAnswears
+    let all = [];
 
-    // selectedAnswear.forEach((item) => {
-    //   console.log(item);
-    // });
-    selectedAnswear.forEach((el) => {
-      console.log(el);
+    all.push(allAnswears[i].correct_answer);
+    allAnswears[i].incorrect_answer.forEach((item) => {
+      all.push(item);
     });
+
+    console.log(all);
+
+    // console.log(correct);
+    // console.log(incorrect);
   }
+  // console.log("Correct: ", allAnswears[0].correct_answer);
+  // console.log("Incorrect: ", allAnswears[0].incorrect_answer);
 
-  const board = data.map((question) => {
-    const mapedIncorrectAnswers = question.incorrect_answers.map(
-      (incorrect) => {
-        return {
-          value: incorrect,
-          id: nanoid(),
-          correct: false,
-          select: false,
-        };
-      }
-    );
-    const combinedAnswears = [
-      ...mapedIncorrectAnswers,
-      {
-        value: question.correct_answer,
-        id: nanoid(),
-        correct: true,
-        select: false,
-      },
-    ];
+  // console.log(combinedAnswears);
 
-    return (
-      <Question
-        key={nanoid()}
-        category={question.category}
-        question={question.question}
-        combinedAnswears={combinedAnswears}
-        sandAnswearUp={sandAnswearUp}
-      />
-    );
+  const board = allAnswears.map((question) => {
+    return null;
+    // <Question
+    //   key={question.id}
+    //   id={question.id}
+    //   category={question.category}
+    //   question={question.question}
+    //   combinedAnswears={combinedAnswears}
+    // />
   });
 
   return (

@@ -11,7 +11,7 @@ export default function Question({
   sandAnswearUp,
 }) {
   const [allAnswears, setAllAnswears] = React.useState(combinedAnswears);
-
+  console.log(allAnswears);
   function handleSelect(id) {
     setAllAnswears((oldAnswear) => {
       return oldAnswear.map((answear) => {
