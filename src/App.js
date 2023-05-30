@@ -29,30 +29,56 @@ export default function App() {
     }
   }
 
+  // if (data.length > 1) {
+  //   for (let i = 0; i < data.length; i++) {
+  //     newQuestion.push({
+  //       id: nanoid(),
+  //       question: data[i].question,
+  //       category: data[i].category,
+  //       correct_answer: {
+  //         value: data[i].correct_answer,
+  //         id: nanoid(),
+  //         correct: true,
+  //         select: false,
+  //       },
+  //       incorrect_answer: data[i].incorrect_answers.map((incorrect) => {
+  //         return {
+  //           value: incorrect,
+  //           id: nanoid(),
+  //           correct: false,
+  //           select: false,
+  //         };
+  //       }),
+  //     });
+  //   }
+  // } else {
+  //   return;
+  // }
+
   if (data.length > 1) {
     for (let i = 0; i < data.length; i++) {
+      const correct_answer = {
+        value: data[i].correct_answer,
+        id: nanoid(),
+        correct: true,
+        select: false,
+      };
+      const incorrect_answer = data[i].incorrect_answers.map((incorrect) => {
+        return {
+          value: incorrect,
+          id: nanoid(),
+          correct: false,
+          select: false,
+        };
+      });
+
+      const combined_answers = [...incorrect_answer, correct_answer];
+
       newQuestion.push({
         id: nanoid(),
         question: data[i].question,
         category: data[i].category,
-        correct_answer: [data[i].correct_answer].map((correct_value) => {
-          return {
-            value: correct_value,
-            id: nanoid(),
-            correct: true,
-            select: false,
-          };
-        }),
-        incorrect_answer: [data[i].incorrect_answers].map((all_incorrect) => {
-          return all_incorrect.map((incorect_value) => {
-            return {
-              value: incorect_value,
-              id: nanoid(),
-              correct: true,
-              select: false,
-            };
-          });
-        }),
+        combined_answers: combined_answers,
       });
     }
   } else {

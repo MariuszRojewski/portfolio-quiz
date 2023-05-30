@@ -2,18 +2,11 @@ import React from "react";
 import { nanoid } from "nanoid";
 import Answear from "./Answear";
 
-// Musimy teraz jkoś podać wyniki zaznaczenia do Board.js
+export default function Question({ category, question, combinedAnswears }) {
+  const [answears, setAnswears] = React.useState(combinedAnswears);
 
-export default function Question({
-  category,
-  question,
-  combinedAnswears,
-  sandAnswearUp,
-}) {
-  const [allAnswears, setAllAnswears] = React.useState(combinedAnswears);
-  console.log(allAnswears);
   function handleSelect(id) {
-    setAllAnswears((oldAnswear) => {
+    setAnswears((oldAnswear) => {
       return oldAnswear.map((answear) => {
         if (answear.id === id) {
           return { ...answear, select: true };
@@ -22,11 +15,9 @@ export default function Question({
         }
       });
     });
-
-    sandAnswearUp(allAnswears);
   }
 
-  const answears = allAnswears.map((answear) => {
+  const mapedAnswears = answears.map((answear) => {
     return <Answear key={nanoid()} onClick={handleSelect} answear={answear} />;
   });
 
@@ -34,7 +25,7 @@ export default function Question({
     <div className="question">
       <h1 className="question--header">{question}</h1>
       <h2 className="question--category">Category: {category}</h2>
-      <div className="question--all-answears">{answears}</div>
+      <div className="question--all-answears">{mapedAnswears}</div>
     </div>
   );
 }
