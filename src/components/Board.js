@@ -8,21 +8,53 @@ import Question from "./Question";
 // powinna się zmienić na kolor czerwony
 
 export default function QuestionsAndAnswears({ data }) {
-  const [allAnswears, setAllAnswears] = React.useState(data);
-  const [userSelectedAnswears, setUserSelectedAnswears] = React.useState(null);
+  const [dataAnswears, setDataAnswears] = React.useState(data);
+  const [userSelectedAnswears, setUserSelectedAnswears] = React.useState([]);
 
-  function userSelect() {
-    setUserSelectedAnswears();
+  // console.log("userSelectedAnswears: ", userSelectedAnswears);
+
+  function userSelect(correct_or_incorrect) {
+    setUserSelectedAnswears((old) => [...old, correct_or_incorrect]);
   }
 
-  const board = allAnswears.map((question) => {
+  function compareAnswers() {
+    dataAnswears.forEach((dataItem) => {
+      // console.log(element.id);
+      let userSelectedItemCorrectStatus = null;
+      userSelectedAnswears.forEach((userSelectedItem) => {
+        // console.log(item.questionAreaId);
+        if (userSelectedItem.questionAreaId === dataItem.id) {
+          // console.log("mamy tą samą sekcje, można porówna zawartości");
+          // console.log("ID SEKCJI A: ", item.questionAreaId);
+          // console.log("ID SEKCJI B: ", element.id);
+
+          // TRZEBA TERAZ NAPISAĆ PORÓWNANIE ELEMENTÓW,
+          // TE SAME SEKCJE JUŻ MAMY
+
+          userSelectedItemCorrectStatus = userSelectedItem.correctStatus;
+        }
+      });
+
+      // console.log("dataItem: ", dataItem);
+      dataItem.combined_answers.forEach((combinedAnswer) => {
+        if (combinedAnswer.correct === userSelectedItemCorrectStatus) {
+          console.log("Poprawna odpowedź");
+          console.log(combinedAnswer.value);
+        }
+      });
+    });
+  }
+
+  const board = dataAnswears.map((question) => {
     return (
       <Question
         key={question.id}
-        id={question.id}
+        questionAreaId={question.id}
         category={question.category}
         question={question.question}
         combinedAnswears={question.combined_answers}
+        userSelectedAnswears={userSelectedAnswears}
+        userSelect={userSelect}
       />
     );
   });
@@ -30,7 +62,7 @@ export default function QuestionsAndAnswears({ data }) {
   return (
     <div>
       {board}
-      <button>Cheack Answears</button>
+      <button onClick={compareAnswers}>Cheack Answears</button>
     </div>
   );
 }
