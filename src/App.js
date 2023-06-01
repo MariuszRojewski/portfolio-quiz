@@ -14,7 +14,7 @@ export default function App() {
   React.useEffect(() => {
     (async () => {
       let response = await fetch(
-        "https://opentdb.com/api.php?amount=5&category=20"
+        "https://opentdb.com/api.php?amount=2&category=20"
       );
       response = await response.json();
       setData(response.results);

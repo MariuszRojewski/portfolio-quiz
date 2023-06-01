@@ -8,28 +8,27 @@ export default function Question({
   question,
   combinedAnswears,
   userSelect,
-  userSelectedAnswears,
 }) {
   const [answears, setAnswears] = React.useState(combinedAnswears);
-  console.log(userSelectedAnswears);
 
   function handleSelect(id) {
+    const correctParamId = answears.map((param) => {
+      if (param.correct) {
+        return param.id;
+      } else {
+        return null;
+      }
+    });
     setAnswears((oldAnswear) => {
       return oldAnswear.map((answear) => {
         if (answear.id === id) {
-          if (answear.correct) {
-            userSelect({
-              questionAreaId: questionAreaId,
-              // answearId: answear.id,
-              correctStatus: true,
-            });
-          } else {
-            userSelect({
-              questionAreaId: questionAreaId,
-              // answearId: answear.id,
-              correctStatus: false,
-            });
-          }
+          userSelect({
+            rowId: questionAreaId,
+            selectedParamId: answear.id,
+            selectedParamCorrect: answear.correct ? true : false,
+            correctParamId: correctParamId,
+            paramValue: answear.value,
+          });
           return { ...answear, select: true };
         } else {
           return { ...answear, select: false };
