@@ -5,11 +5,15 @@ export default function QuestionsAndAnswears({ data }) {
   const [dataAnswears, setDataAnswears] = React.useState(data);
   const [userSelectedAnswears, setUserSelectedAnswears] = React.useState([]);
 
+  React.useEffect(() => {
+    // Trzeba napisać logikę aktualizacji komponentu Question w QuestionsAndAnswears
+    // Albo odwrotnie
+  });
+
   function userSelect(rowParams) {
     const index = userSelectedAnswears.findIndex(
       (element) => element.rowId === rowParams.rowId
     );
-    console.log(index);
     if (index !== -1) {
       const updatedArray = [...userSelectedAnswears];
       updatedArray[index] = rowParams;
