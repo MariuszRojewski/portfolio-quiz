@@ -4,11 +4,14 @@ import Question from "./Question";
 export default function QuestionsAndAnswears({ data }) {
   const [dataAnswears, setDataAnswears] = React.useState(data);
   const [userSelectedAnswears, setUserSelectedAnswears] = React.useState([]);
+  const [checkAnswear, setCheckAnswear] = React.useState(false);
+  const [userSelectedData, setUserSelectedData] = React.useState([]);
 
   React.useEffect(() => {
-    // Trzeba napisać logikę aktualizacji komponentu Question w QuestionsAndAnswears
-    // Albo odwrotnie
-  });
+    if (checkAnswear) {
+      setUserSelectedData(userSelectedAnswears);
+    }
+  }, [checkAnswear, userSelectedAnswears]);
 
   function userSelect(rowParams) {
     const index = userSelectedAnswears.findIndex(
@@ -24,7 +27,13 @@ export default function QuestionsAndAnswears({ data }) {
   }
 
   function compareAnswers() {
-    console.log(userSelectedAnswears);
+    if (checkAnswear) {
+      setCheckAnswear(false);
+    } else {
+      if (userSelectedAnswears.length === dataAnswears.length) {
+        setCheckAnswear(true);
+      }
+    }
   }
 
   const board = dataAnswears.map((question) => {
@@ -36,6 +45,7 @@ export default function QuestionsAndAnswears({ data }) {
         question={question.question}
         combinedAnswears={question.combined_answers}
         userSelect={userSelect}
+        userSelectedData={userSelectedData}
       />
     );
   });

@@ -8,15 +8,32 @@ export default function Question({
   question,
   combinedAnswears,
   userSelect,
+  userSelectedData,
 }) {
   const [answears, setAnswears] = React.useState(combinedAnswears);
+  // Jeśli userMarked jest true, to znaczy, że przycisk Check Answears został odpalony
+  const [userMarked, setUserMarked] = React.useState(null);
+
+  React.useEffect(() => {
+    if (userSelectedData.length !== 0) {
+      setUserMarked(userSelectedData);
+    }
+  }, [userSelectedData]);
 
   function handleSelect(id) {
-    const correctParamId = answears.map((param) => {
+    // const correctParamId = answears.map((param) => {
+    //   if (param.correct) {
+    //     return param.id;
+    //   } else {
+    //     return;
+    //   }
+    // });
+    let correctParamId = null;
+    answears.forEach((param) => {
       if (param.correct) {
-        return param.id;
+        correctParamId = param.id;
       } else {
-        return null;
+        return;
       }
     });
     setAnswears((oldAnswear) => {
@@ -37,8 +54,28 @@ export default function Question({
     });
   }
 
+  // COŚ TU NIE DZIAŁA JAK POWINNO, MUSISZ JAKOŚ USTAWIĆ ID
+  // DLA TYCH ANSWERÓW TAK, ŻEBY SIĘ ZAZNACZAŁY POPRAWNIE
+
   const mapedAnswears = answears.map((answear) => {
-    return <Answear key={nanoid()} onClick={handleSelect} answear={answear} />;
+    // console.log("questionAreaId: ", questionAreaId);
+    let sendCorrectParamId = null;
+    if (userMarked !== null) {
+      userMarked.forEach((mark) => {
+        if (mark.rowId === questionAreaId) {
+          sendCorrectParamId = mark.correctParamId;
+        }
+      });
+    }
+
+    return (
+      <Answear
+        key={nanoid()}
+        onClick={handleSelect}
+        answear={answear}
+        userCheckAnswers={userMarked !== null ? true : false}
+      />
+    );
   });
 
   return (

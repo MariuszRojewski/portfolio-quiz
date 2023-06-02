@@ -103,3 +103,8 @@ body {
 .select{
   background-color: aquamarine;
 }
+
+.correct-answear {
+  background-color: crimson;
+  color: white;
+}
