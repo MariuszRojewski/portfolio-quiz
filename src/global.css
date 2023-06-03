@@ -93,18 +93,27 @@ body {
 }
 
 .question--answear {
-  font-size: large;
-  padding: 5px 15px;
+  font-size: medium;
+  font-weight: 500;
+  padding: 5px 25px;
   border-radius: 15px;
   margin: 0 5px;
   cursor: pointer;
+  border: 1px solid #DBDEF0;
 }
 
 .select{
-  background-color: aquamarine;
+  background-color: #D6DBF5;
+  color: #293264;
+}
+
+.saved-select{
+  background-color: #94D7A2;
+  color: #293264;
 }
 
 .correct-answear {
-  background-color: crimson;
-  color: white;
+  background-color: #F8BCBC;
+  color: #293264;
+  opacity: 0.5;
 }

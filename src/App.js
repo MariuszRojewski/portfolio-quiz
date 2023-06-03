@@ -29,32 +29,6 @@ export default function App() {
     }
   }
 
-  // if (data.length > 1) {
-  //   for (let i = 0; i < data.length; i++) {
-  //     newQuestion.push({
-  //       id: nanoid(),
-  //       question: data[i].question,
-  //       category: data[i].category,
-  //       correct_answer: {
-  //         value: data[i].correct_answer,
-  //         id: nanoid(),
-  //         correct: true,
-  //         select: false,
-  //       },
-  //       incorrect_answer: data[i].incorrect_answers.map((incorrect) => {
-  //         return {
-  //           value: incorrect,
-  //           id: nanoid(),
-  //           correct: false,
-  //           select: false,
-  //         };
-  //       }),
-  //     });
-  //   }
-  // } else {
-  //   return;
-  // }
-
   if (data.length > 1) {
     for (let i = 0; i < data.length; i++) {
       const correct_answer = {

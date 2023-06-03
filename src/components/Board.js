@@ -6,12 +6,20 @@ export default function QuestionsAndAnswears({ data }) {
   const [userSelectedAnswears, setUserSelectedAnswears] = React.useState([]);
   const [checkAnswear, setCheckAnswear] = React.useState(false);
   const [userSelectedData, setUserSelectedData] = React.useState([]);
+  const [points, setPoints] = React.useState(0);
 
   React.useEffect(() => {
     if (checkAnswear) {
       setUserSelectedData(userSelectedAnswears);
     }
   }, [checkAnswear, userSelectedAnswears]);
+
+  // Trzeba się teraz zasnatowić, jak
+  function userPoints() {
+    setPoints((oldPoints) => {
+      return oldPoints + 1;
+    });
+  }
 
   function userSelect(rowParams) {
     const index = userSelectedAnswears.findIndex(
@@ -36,6 +44,10 @@ export default function QuestionsAndAnswears({ data }) {
     }
   }
 
+  function resetQuiz() {
+    console.log("Reset game");
+  }
+
   const board = dataAnswears.map((question) => {
     return (
       <Question
@@ -46,6 +58,7 @@ export default function QuestionsAndAnswears({ data }) {
         combinedAnswears={question.combined_answers}
         userSelect={userSelect}
         userSelectedData={userSelectedData}
+        userPoints={userPoints}
       />
     );
   });
@@ -53,7 +66,12 @@ export default function QuestionsAndAnswears({ data }) {
   return (
     <div>
       {board}
-      <button onClick={compareAnswers}>Cheack Answears</button>
+      {points !== 0 ? points : ""}
+      {checkAnswear ? (
+        <button onClick={resetQuiz}>Reset Quiz</button>
+      ) : (
+        <button onClick={compareAnswers}>Cheack Answears</button>
+      )}
     </div>
   );
 }

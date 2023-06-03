@@ -9,6 +9,7 @@ export default function Question({
   combinedAnswears,
   userSelect,
   userSelectedData,
+  userPoints,
 }) {
   const [answears, setAnswears] = React.useState(combinedAnswears);
   // Jeśli userMarked jest true, to znaczy, że przycisk Check Answears został odpalony
@@ -21,13 +22,6 @@ export default function Question({
   }, [userSelectedData]);
 
   function handleSelect(id) {
-    // const correctParamId = answears.map((param) => {
-    //   if (param.correct) {
-    //     return param.id;
-    //   } else {
-    //     return;
-    //   }
-    // });
     let correctParamId = null;
     answears.forEach((param) => {
       if (param.correct) {
@@ -54,11 +48,7 @@ export default function Question({
     });
   }
 
-  // COŚ TU NIE DZIAŁA JAK POWINNO, MUSISZ JAKOŚ USTAWIĆ ID
-  // DLA TYCH ANSWERÓW TAK, ŻEBY SIĘ ZAZNACZAŁY POPRAWNIE
-
   const mapedAnswears = answears.map((answear) => {
-    // console.log("questionAreaId: ", questionAreaId);
     let sendCorrectParamId = null;
     if (userMarked !== null) {
       userMarked.forEach((mark) => {
@@ -74,6 +64,7 @@ export default function Question({
         onClick={handleSelect}
         answear={answear}
         userCheckAnswers={userMarked !== null ? true : false}
+        userPoints={userPoints}
       />
     );
   });
