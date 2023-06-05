@@ -8,7 +8,6 @@ export default function Answear({
 }) {
   if (userCheckAnswers) {
     if (answear.select === answear.correct) {
-      userPoints();
       return (
         <button
           className={`question--answear ${

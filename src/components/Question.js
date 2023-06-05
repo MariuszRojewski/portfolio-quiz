@@ -49,15 +49,6 @@ export default function Question({
   }
 
   const mapedAnswears = answears.map((answear) => {
-    let sendCorrectParamId = null;
-    if (userMarked !== null) {
-      userMarked.forEach((mark) => {
-        if (mark.rowId === questionAreaId) {
-          sendCorrectParamId = mark.correctParamId;
-        }
-      });
-    }
-
     return (
       <Answear
         key={nanoid()}

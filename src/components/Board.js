@@ -1,25 +1,30 @@
 import React from "react";
 import Question from "./Question";
 
-export default function QuestionsAndAnswears({ data }) {
-  const [dataAnswears, setDataAnswears] = React.useState(data);
+export default function QuestionsAndAnswears({ data, askApi }) {
+  // coś tu nie działa jak trzeba, teraz jak dane są przesyłane do
+  // się wszystko odświeża, ale nie tak jak trzeba. jest opóźnienie
+  // i zmieniony stan, dalej trzyma zablokowane wcześniej elememty
+  const dataAnswears = data;
   const [userSelectedAnswears, setUserSelectedAnswears] = React.useState([]);
   const [checkAnswear, setCheckAnswear] = React.useState(false);
   const [userSelectedData, setUserSelectedData] = React.useState([]);
   const [points, setPoints] = React.useState(0);
 
+  console.log("DATA: ", data);
+
   React.useEffect(() => {
     if (checkAnswear) {
       setUserSelectedData(userSelectedAnswears);
     }
-  }, [checkAnswear, userSelectedAnswears]);
-
-  // Trzeba się teraz zasnatowić, jak
-  function userPoints() {
-    setPoints((oldPoints) => {
-      return oldPoints + 1;
-    });
-  }
+    if (userSelectedData) {
+      userSelectedData.forEach((item) => {
+        if (item.selectedParamCorrect) {
+          setPoints((prevPoints) => prevPoints + 1);
+        }
+      });
+    }
+  }, [checkAnswear, userSelectedAnswears, userSelectedData]);
 
   function userSelect(rowParams) {
     const index = userSelectedAnswears.findIndex(
@@ -46,6 +51,7 @@ export default function QuestionsAndAnswears({ data }) {
 
   function resetQuiz() {
     console.log("Reset game");
+    askApi("https://opentdb.com/api.php?amount=2&category=20");
   }
 
   const board = dataAnswears.map((question) => {
@@ -58,7 +64,6 @@ export default function QuestionsAndAnswears({ data }) {
         combinedAnswears={question.combined_answers}
         userSelect={userSelect}
         userSelectedData={userSelectedData}
-        userPoints={userPoints}
       />
     );
   });
@@ -66,9 +71,11 @@ export default function QuestionsAndAnswears({ data }) {
   return (
     <div>
       {board}
-      {points !== 0 ? points : ""}
       {checkAnswear ? (
-        <button onClick={resetQuiz}>Reset Quiz</button>
+        <div>
+          Points: {points ? points : "0"}
+          <button onClick={resetQuiz}>Reset Quiz</button>
+        </div>
       ) : (
         <button onClick={compareAnswers}>Cheack Answears</button>
       )}
