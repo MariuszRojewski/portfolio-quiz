@@ -2,16 +2,17 @@ import React from "react";
 import Question from "./Question";
 
 export default function QuestionsAndAnswears({ data, askApi }) {
-  // coś tu nie działa jak trzeba, teraz jak dane są przesyłane do
-  // się wszystko odświeża, ale nie tak jak trzeba. jest opóźnienie
-  // i zmieniony stan, dalej trzyma zablokowane wcześniej elememty
+  // Trzeba jeszcze zrobić pomieszanie odpowedzi np. poprzez taką funkcję
+  // function shuffle (array) {
+  //   return array.sort ( () => Math.random () - 0.5);
+  // }
+
   const dataAnswears = data;
+  console.log("dataAnswears: ", dataAnswears);
   const [userSelectedAnswears, setUserSelectedAnswears] = React.useState([]);
   const [checkAnswear, setCheckAnswear] = React.useState(false);
   const [userSelectedData, setUserSelectedData] = React.useState([]);
   const [points, setPoints] = React.useState(0);
-
-  console.log("DATA: ", data);
 
   React.useEffect(() => {
     if (checkAnswear) {
@@ -42,16 +43,27 @@ export default function QuestionsAndAnswears({ data, askApi }) {
   function compareAnswers() {
     if (checkAnswear) {
       setCheckAnswear(false);
+    } else if (userSelectedAnswears.length === dataAnswears.length) {
+      setCheckAnswear(true);
     } else {
-      if (userSelectedAnswears.length === dataAnswears.length) {
-        setCheckAnswear(true);
-      }
+      console.log("Coś poszło nie tak");
+      return;
     }
   }
 
   function resetQuiz() {
     console.log("Reset game");
+    setUserSelectedAnswears([]);
+    setCheckAnswear(false);
+    setUserSelectedData([]);
+    setPoints(0);
     askApi("https://opentdb.com/api.php?amount=2&category=20");
+  }
+
+  function decodeHTMLEntities(text) {
+    var textarea = document.createElement("textarea");
+    textarea.innerHTML = text;
+    return textarea.value;
   }
 
   const board = dataAnswears.map((question) => {
@@ -60,7 +72,7 @@ export default function QuestionsAndAnswears({ data, askApi }) {
         key={question.id}
         questionAreaId={question.id}
         category={question.category}
-        question={question.question}
+        question={decodeHTMLEntities(question.question)}
         combinedAnswears={question.combined_answers}
         userSelect={userSelect}
         userSelectedData={userSelectedData}

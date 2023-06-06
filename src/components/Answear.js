@@ -1,11 +1,12 @@
 import React from "react";
 
-export default function Answear({
-  onClick,
-  answear,
-  userCheckAnswers,
-  userPoints,
-}) {
+export default function Answear({ onClick, answear, userCheckAnswers }) {
+  function decodeHTMLEntities(text) {
+    var textarea = document.createElement("textarea");
+    textarea.innerHTML = text;
+    return textarea.value;
+  }
+
   if (userCheckAnswers) {
     if (answear.select === answear.correct) {
       return (
@@ -14,7 +15,7 @@ export default function Answear({
             answear.select ? "saved-select" : ""
           }`}
         >
-          {answear.value}
+          {decodeHTMLEntities(answear.value)}
         </button>
       );
     } else {
@@ -24,7 +25,7 @@ export default function Answear({
             answear.select ? "select" : "correct-answear"
           }`}
         >
-          {answear.value}
+          {decodeHTMLEntities(answear.value)}
         </button>
       );
     }
@@ -36,7 +37,7 @@ export default function Answear({
           onClick(answear.id);
         }}
       >
-        {answear.value}
+        {decodeHTMLEntities(answear.value)}
       </button>
     );
   }

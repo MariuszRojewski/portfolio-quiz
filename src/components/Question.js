@@ -14,6 +14,7 @@ export default function Question({
   const [answears, setAnswears] = React.useState(combinedAnswears);
   // Jeśli userMarked jest true, to znaczy, że przycisk Check Answears został odpalony
   const [userMarked, setUserMarked] = React.useState(null);
+  // console.log("userMarked: ", userMarked);
 
   React.useEffect(() => {
     if (userSelectedData.length !== 0) {
