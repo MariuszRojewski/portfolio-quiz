@@ -3,12 +3,10 @@ import Question from "./Question";
 
 export default function QuestionsAndAnswears({ data, askApi }) {
   // Trzeba jeszcze zrobić pomieszanie odpowedzi np. poprzez taką funkcję
-  // function shuffle (array) {
-  //   return array.sort ( () => Math.random () - 0.5);
-  // }
 
   const dataAnswears = data;
   console.log("dataAnswears: ", dataAnswears);
+
   const [userSelectedAnswears, setUserSelectedAnswears] = React.useState([]);
   const [checkAnswear, setCheckAnswear] = React.useState(false);
   const [userSelectedData, setUserSelectedData] = React.useState([]);

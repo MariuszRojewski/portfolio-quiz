@@ -19,6 +19,11 @@ export default function App() {
   React.useEffect(() => {
     if (data.length > 1) {
       let tempQuestion = [];
+
+      function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+      }
+
       for (let i = 0; i < data.length; i++) {
         const correct_answer = {
           value: data[i].correct_answer,
@@ -35,7 +40,7 @@ export default function App() {
           };
         });
 
-        const combined_answers = [...incorrect_answer, correct_answer];
+        const combined_answers = shuffle([...incorrect_answer, correct_answer]);
 
         tempQuestion.push({
           id: nanoid(),
