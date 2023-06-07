@@ -13,7 +13,7 @@ export default function App() {
   const [newQuestion, setNewQuestion] = React.useState([]);
 
   React.useEffect(() => {
-    askApi("https://opentdb.com/api.php?amount=2&category=20");
+    askApi("https://opentdb.com/api.php?amount=5&category=20");
   }, []);
 
   React.useEffect(() => {
@@ -65,7 +65,7 @@ export default function App() {
     if (newQuestion) {
       setStart(!start);
     } else {
-      console.log("Czekam na dane");
+      console.log("Waiting for the data");
     }
   }
 

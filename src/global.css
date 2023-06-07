@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;500;700&display=swap');
+
 * {
   padding: 0px;
   margin: 0px;
@@ -5,6 +7,8 @@
 
 body {
   background-color: #F5F7FB;
+  color: #293264;
+  font-family: 'Karla', sans-serif;
 }
 
 .wrapper {
@@ -17,25 +21,14 @@ body {
   flex-direction: column;
 }
 
-.top_object {
-  position: absolute;
-  left: 62.24%;
-  right: -62.24%;
-  top: 161.16%;
-  bottom: -161.16%;
-
-  background: #FFFAD1;
-  transform: rotate(-128.49deg);
-}
-
-.bottom_object {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-
-  background: #DEEBF8;
+.board {
+  position: relative;
+  height: max-content;
+  border: 1px solid #DBDEF0; 
+  border-radius: 15px;
+  margin: 20px 0;
+  padding: 20px 10px;
+  max-width: 900px;
 }
 
 .start_page {
@@ -52,15 +45,21 @@ body {
 
 .start_page--info {
   line-height: 1.4em;
+  font-size: 17px;
+  font-weight: 300;
 }
 
 .start_page--start-button {
   background-color: #4D5B9E;
   color: white;
-  margin-top: 40px;
-  padding: 15px 40px;
+  padding: 20px 40px;
+  margin: 30px 0;
+  border: 0;
   border-radius: 15px;
-  border-color: transparent;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
 
 .start_page--start-button:hover {
@@ -69,7 +68,7 @@ body {
 
 .question {
   padding: 10px 20px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #DBDEF0;
   margin-bottom: 10px;
 }
 
@@ -92,14 +91,43 @@ body {
   align-items: center;
 }
 
+.question--cockpit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0 15px 0;
+}
+
+.question--cockpit-points {
+  margin-right: 15px;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.question--cockpit-button {
+  background-color: #4D5B9E;
+  padding: 20px 40px;
+  color: white;
+  border: 0;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
 .question--answear {
   font-size: medium;
   font-weight: 500;
+  background-color: white;
   padding: 5px 25px;
   border-radius: 15px;
   margin: 0 5px;
   cursor: pointer;
-  border: 1px solid #DBDEF0;
+  border: 1px solid #293264;
+  color: #293264;
 }
 
 .select{
